@@ -1,8 +1,8 @@
 Package: daqapo
 Type: Package
 Title: Data Quality Assessment for Process-Oriented Data
-Version: 0.3.0
-Date: 2020-04-07
+Version: 0.3.1
+Date: 2020-10-02
 Authors@R: c(
             person("Niels", "Martin", email = "niels.martin@uhasselt.be", role = c("aut", "cre")),
             person("Greg", "Van Houdt", email = "greg.vanhoudt@uhasselt.be", role = "ctb"),
@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 URL: https://github.com/nielsmartin
 BugReports: https://github.com/nielsmartin/daqapo/issues
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.0.9000
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 Imports: dplyr, lubridate, stringdist, stringr, tidyr, xesreadR, rlang,
@@ -20,10 +20,10 @@ Imports: dplyr, lubridate, stringdist, stringr, tidyr, xesreadR, rlang,
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-04-07 20:11:20 UTC; lucp8034
+Packaged: 2020-10-02 08:48:42 UTC; lucp8407
 Author: Niels Martin [aut, cre],
   Greg Van Houdt [ctb],
   Gert Janssenswillen [ctb]
 Maintainer: Niels Martin <niels.martin@uhasselt.be>
 Repository: CRAN
-Date/Publication: 2020-04-08 09:50:05 UTC
+Date/Publication: 2020-10-02 16:22:09 UTC
