@@ -84,6 +84,8 @@ detect_inactive_periods.activitylog <- function(activitylog,
   message("*** OUTPUT ***")
   message("Specified threshold of ", threshold, " minutes is violated ", nrow(log), " times.", "\n")
 
+  log <- as.data.frame(log)
+
   if(details == TRUE){
     message("Threshold is violated in the following periods: ", "\n")
     if(timestamp == "both"){

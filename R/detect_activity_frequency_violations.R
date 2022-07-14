@@ -51,7 +51,8 @@ detect_activity_frequency_violations.activitylog <- function(activitylog, ... , 
   # Case level: interesting activities are those that occur >= threshold times
   anomalies <- activitylog %>%
     filter_activity(names(params)) %>%
-    count(!!case_id_(activitylog), !!activity_id_(activitylog)) %>%
+    group_by(!!case_id_(activitylog), !!activity_id_(activitylog)) %>%
+    summarize(n = n()) %>%
     arrange(-n) %>%
     filter(!!rlang::parse_expr(anomaly_filter))
 

@@ -30,21 +30,23 @@ hospital %>%
   activitylog(case_id = "patient_visit_nr",
               activity_id = "activity",
               resource_id = "originator",
-              lifecycle_ids = c("start", "complete")) -> hospital
+              timestamps = c("start", "complete")) -> hospital
 
 ## ----ReadEventLog-------------------------------------------------------------
 hospital_events
 
 ## ----ReadEventLog_Cols--------------------------------------------------------
 hospital_events %>%
-  convert_timestamps(c("timestamp"), format = dmy_hms) %>%
-  mutate(event_matching = paste(patient_visit_nr, activity, event_matching)) %>%
-  events_to_activitylog(case_id = "patient_visit_nr", 
+  bupaR::convert_timestamps(c("timestamp"), format = dmy_hms) %>%
+  bupaR::mutate(event_matching = paste(patient_visit_nr, activity, event_matching)) %>%
+  bupaR::eventlog(case_id = "patient_visit_nr", 
                         activity_id = "activity", 
                         activity_instance_id = "event_matching", 
                         timestamp = "timestamp", 
                         resource_id = "originator",
-                        lifecycle_id = "event_lifecycle_state") -> hospital_events
+                        lifecycle_id = "event_lifecycle_state") %>%
+  fix_resource_inconsistencies() %>%
+  bupaR::to_activitylog() -> hospital_events
 
 
 ## -----------------------------------------------------------------------------

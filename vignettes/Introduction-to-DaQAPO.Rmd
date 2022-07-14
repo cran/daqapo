@@ -118,7 +118,7 @@ hospital %>%
   activitylog(case_id = "patient_visit_nr",
               activity_id = "activity",
               resource_id = "originator",
-              lifecycle_ids = c("start", "complete")) -> hospital
+              timestamps = c("start", "complete")) -> hospital
 ```
 
 
@@ -133,25 +133,28 @@ hospital_events
 
 The same principle regarding the timestamps apply. Therefore, the `POSIXct` format must be applied in advance. Additionally, the event log object also requires an activity instance id. If needed, one can be created manually as illustrated below.
 
-The following functions form the building blocks of the required data preparation, but not all must be called to obtain a fully prepared event log at all times:
+The following functions form the building blocks of the required data preparation, but not all must be called to obtain a fully prepared activity log at all times:
 
 * `convert_timestamps`
 * `assign_instance_id`
 * `check/fix_resource_inconsistencies`
 * `standardize_lifecycle`
-* `events_to_activitylog`
+* `eventlog`
+* `to_activitylog`
 
 
 ```{r ReadEventLog_Cols}
 hospital_events %>%
-  convert_timestamps(c("timestamp"), format = dmy_hms) %>%
-  mutate(event_matching = paste(patient_visit_nr, activity, event_matching)) %>%
-  events_to_activitylog(case_id = "patient_visit_nr", 
+  bupaR::convert_timestamps(c("timestamp"), format = dmy_hms) %>%
+  bupaR::mutate(event_matching = paste(patient_visit_nr, activity, event_matching)) %>%
+  bupaR::eventlog(case_id = "patient_visit_nr", 
                         activity_id = "activity", 
                         activity_instance_id = "event_matching", 
                         timestamp = "timestamp", 
                         resource_id = "originator",
-                        lifecycle_id = "event_lifecycle_state") -> hospital_events
+                        lifecycle_id = "event_lifecycle_state") %>%
+  fix_resource_inconsistencies() %>%
+  bupaR::to_activitylog() -> hospital_events
 
 ```
 

@@ -23,13 +23,13 @@ detect_similar_labels <- function(activitylog, column_labels, max_edit_distance,
 
 #' @export
 
-detect_similar_labels <- function(activitylog, column_labels, max_edit_distance = 3, show_NA = FALSE, ignore_capitals = FALSE, filter_condition = NULL) {
+detect_similar_labels.activitylog <- function(activitylog, column_labels, max_edit_distance = 3, show_NA = FALSE, ignore_capitals = FALSE, filter_condition = NULL) {
 
   # Predefine variables
   similar_to <- NULL
   data <- NULL
 
-  if(class(column_labels) != "character") {
+  if(!inherits(column_labels, "character")) {
     stop("column_labels must be a character vector")
   }
 
@@ -89,10 +89,10 @@ detect_similar_labels <- function(activitylog, column_labels, max_edit_distance 
 
 gather_similar_labels <- function(variable, activitylog, ignore_capitals = ignore_capitals, max_edit_distance = max_edit_distance) {
 
-  if(class(activitylog[[variable]]) == "character") {
+  if(inherits(activitylog[[variable]], "character")) {
     labels <- unique(activitylog[[variable]])
 
-  } else if (class(activitylog[[variable]]) == "factor") {
+  } else if (inherits(activitylog[[variable]], "factor")) {
     labels <- levels(activitylog[[variable]])
   }
 

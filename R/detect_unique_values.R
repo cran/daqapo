@@ -34,7 +34,7 @@ detect_unique_values <- function(activitylog, column_labels, filter_condition = 
   }
 
 
-  if(class(column_labels) != "character") {
+  if(!inherits(column_labels,  "character")) {
     stop("column_labels must be a character vector")
   }
 

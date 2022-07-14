@@ -85,7 +85,9 @@ detect_overlaps_case <- function(activitylog, details) {
   activity_a <- NULL
   activity_b <- NULL
   time_of_overlap_mins <- NULL
+
   activitylog %>%
+    as.data.frame() %>%
     rename(ACTIVITY_CLASSIFIER := !!activity_id_(activitylog),
            CASE_CLASSIFIER := !!case_id_(activitylog)) %>%
     select(ACTIVITY_CLASSIFIER, CASE_CLASSIFIER, start, complete) %>%

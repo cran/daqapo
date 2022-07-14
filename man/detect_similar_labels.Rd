@@ -7,10 +7,10 @@
 detect_similar_labels(
   activitylog,
   column_labels,
-  max_edit_distance = 3,
-  show_NA = FALSE,
-  ignore_capitals = FALSE,
-  filter_condition = NULL
+  max_edit_distance,
+  show_NA,
+  ignore_capitals,
+  filter_condition
 )
 }
 \arguments{
